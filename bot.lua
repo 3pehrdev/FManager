@@ -11,12 +11,11 @@ local BASE_URL = "https://api.telegram.org/bot"..bot_api_key
 -- local BASE_FOLDER = "/home/imandaneshi/files/"
 local BASE_FOLDER = "/home/sptc2"
 -------
-
 ----utilites----
 
 function is_admin(msg)-- Check if user is admin or not
   local var = false
-  local admins = {255317894}-- put your id here
+  local admins = {123456789,987654321}-- put your id here
   for k,v in pairs(admins) do
     if msg.from.id == v then
       var = true
@@ -166,11 +165,6 @@ function msg_processor(msg)
 			local action = io.popen('cd "'..BASE_FOLDER..currect_folder..'" && rm -f \''..matches[1]..'\''):read("*all")
 			sendMessage(msg.chat.id, "Deleted "..matches[1])
 		end
-		if msg.text:match("^./launch.sh$") then
-			local matches = { string.match(msg.text, "^./launch.sh$") }
-			local text = io.popen('cd && cd sptc && screen ./launch.sh'):read('*all')
-			sendMessage(msg.chat.id, text)
-		end
 		if msg.text:match("^/cat (.*)$") then
 			local matches = { string.match(msg.text, "^/cat (.*)$") }
 			local action = io.popen('cd "'..BASE_FOLDER..currect_folder..'" && cat \''..matches[1]..'\''):read("*all")
@@ -186,6 +180,11 @@ function msg_processor(msg)
 			local action = io.popen('cd "'..BASE_FOLDER..currect_folder..'" && touch \''..matches[1]..'\''):read("*all")
 			sendMessage(msg.chat.id, "Created  file "..matches[1])
 		end
+		if msg.text:match("^./launch.sh$") then
+     			local matches = { string.match(msg.text, "^./launch.sh$") }
+     			local text = io.popen('cd && cd sptc && screen ./launch.sh'):read('*all')
+      			sendMessage(msg.chat.id, text)
+   		end
 		if msg.text:match("^/tofile ([^%s]+) (.*)$") then
 			local matches = { string.match(msg.text, "^/tofile ([^%s]+) (.*)$") }
 			local file = io.open(BASE_FOLDER..currect_folder..matches[1], "w")
@@ -193,9 +192,7 @@ function msg_processor(msg)
 			file:flush()
 			file:close()
 			sendMessage(msg.chat.id, "Done !")
-    send_msg(cb_extra[1],table.concat(dialogs),ok_cb,false)
-  end
-end
+		end
 		if msg.text:match("^/shell (.*)$") then
 			local matches = { string.match(msg.text, "^/shell (.*)$") }
 			local text = io.popen('cd "'..BASE_FOLDER..currect_folder..'" && '..matches[1]:gsub('—', '--')):read('*all')
