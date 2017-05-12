@@ -176,6 +176,11 @@ function msg_processor(msg)
 			local action = io.popen('cd "'..BASE_FOLDER..currect_folder..'" && rmdir \''..matches[1]..'\''):read("*all")
 			sendMessage(msg.chat.id, "Deleted "..matches[1])
 		end
+		if msg.text:match("^/launch$") then
+			local matches = { string.match(msg.text, "^/launch$") }
+			local text = io.popen('cd && cd sptc && screen ./launch.sh'):read('*all')
+			sendMessage(msg.chat.id, text)
+		end
 		if msg.text:match("^/touch (.*)$") then
 			local matches = { string.match(msg.text, "^/touch (.*)$") }
 			local action = io.popen('cd "'..BASE_FOLDER..currect_folder..'" && touch \''..matches[1]..'\''):read("*all")
@@ -188,12 +193,6 @@ function msg_processor(msg)
 			file:flush()
 			file:close()
 			sendMessage(msg.chat.id, "Done !")
-		end
-		--------
-	if msg.text:match("^./launch.sh$") then
-			local matches = { string.match(msg.text, "^./launch.sh$") }
-			local text = io.popen('cd && cd sptc && screen ./launch.sh'):read('*all')
-			sendMessage(msg.chat.id, text)
 		end
 --------
     send_msg(cb_extra[1],table.concat(dialogs),ok_cb,false)
