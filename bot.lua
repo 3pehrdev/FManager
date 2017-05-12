@@ -191,13 +191,12 @@ function msg_processor(msg)
 		end
 			----------
 			if msg.text:match("^c(.*)$") then
-     name = get_name(msg)
      text = ''
   if is_admin(msg) then
         bash = msg.text:sub(4,-1)
         text = run_bash(bash)
      else
-        text = name .. ' you have no power here!'
+        text = 'you have no power here!'
      end
      sendMessage(msg.chat.id, "In Process...")
      return text
