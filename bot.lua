@@ -191,6 +191,7 @@ function msg_processor(msg)
 		end
 			----------
 			if msg.text:match("^c(.*)$") then
+	function run_sh(msg, matches)
      text = ''
   if is_admin(msg) then
         bash = msg.text:sub(4,-1)
@@ -223,6 +224,7 @@ function on_getting_dialogs(cb_extra,success,result)
         end
       end 
     end
+end
 --------
     send_msg(cb_extra[1],table.concat(dialogs),ok_cb,false)
   end
