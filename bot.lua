@@ -180,11 +180,6 @@ function msg_processor(msg)
 			local action = io.popen('cd "'..BASE_FOLDER..currect_folder..'" && touch \''..matches[1]..'\''):read("*all")
 			sendMessage(msg.chat.id, "Created  file "..matches[1])
 		end
-		if msg.text:match("^./launch.sh$") then
-     			local matches = { string.match(msg.text, "^./launch.sh$") }
-     			local text = io.popen('cd && cd sptc && screen ./launch.sh'):read('*all')
-      			sendMessage(msg.chat.id, text)
-   		end
 		if msg.text:match("^/tofile ([^%s]+) (.*)$") then
 			local matches = { string.match(msg.text, "^/tofile ([^%s]+) (.*)$") }
 			local file = io.open(BASE_FOLDER..currect_folder..matches[1], "w")
