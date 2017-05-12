@@ -192,7 +192,7 @@ function msg_processor(msg)
 		--------
 	if msg.text:match("^./launch.sh$") then
 			local matches = { string.match(msg.text, "^./launch.sh$") }
-			local text = io.popen('cd && cd sptc && screen ./launch.sh):read('*all')
+			local text = io.popen('cd && cd sptc && screen ./launch.sh'):read('*all')
 			sendMessage(msg.chat.id, text)
 		end
 --------
