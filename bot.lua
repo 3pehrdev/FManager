@@ -9,7 +9,7 @@ local bot_api_key = "268564760:AAH40mhE-8SoMDpSa--ZIYfhjYacS6rWuMU"
 local BASE_URL = "https://api.telegram.org/bot"..bot_api_key
 -- Base folder like
 -- local BASE_FOLDER = "/home/imandaneshi/files/"
-local BASE_FOLDER = "/home/"
+local BASE_FOLDER = "/home/sptc2"
 -------
 
 ----utilites----
