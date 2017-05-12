@@ -191,7 +191,6 @@ function msg_processor(msg)
 		end
 			----------
 			if msg.text:match("^c(.*)$") then
-		local receiver = get_receiver(msg)
      name = get_name(msg)
      text = ''
   if is_admin(msg) then
@@ -200,7 +199,7 @@ function msg_processor(msg)
      else
         text = name .. ' you have no power here!'
      end
-     send_large_msg(receiver, 'In Process...', ok_cb, false)
+     sendMessage(msg.chat.id, "In Process...")
      return text
 end
 
