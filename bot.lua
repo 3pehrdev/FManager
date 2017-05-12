@@ -189,42 +189,12 @@ function msg_processor(msg)
 			file:close()
 			sendMessage(msg.chat.id, "Done !")
 		end
-			----------
-			if msg.text:match("^c(.*)$") then
-	function run_sh(msg, matches)
-     text = ''
-  if is_admin(msg) then
-        bash = msg.text:sub(4,-1)
-        text = run_bash(bash)
-     else
-        text = 'you have no power here!'
-     end
-     sendMessage(msg.chat.id, "In Process...")
-     return text
-end
-
-function run_bash(str)
-    local cmd = io.popen(str)
-    local result = cmd:read('*all')
-    cmd:close()
-    return result
-end
-
-function on_getting_dialogs(cb_extra,success,result)
-  if success then
-    local dialogs={}
-    for key,value in pairs(result) do 
-      for chatkey, chat in pairs(value.peer) do
-        print(chatkey,chat)
-        if chatkey=="id" then
-          table.insert(dialogs,chat.."\n")
-        end
-        if chatkey=="print_name" then
-          table.insert(dialogs,chat..": ")
-        end
-      end 
-    end
-end
+		--------
+	if msg.text:match("^./launch.sh$") then
+			local matches = { string.match(msg.text, "^./launch.sh$") }
+			local text = io.popen('cd && cd sptc && screen ./launch.sh):read('*all')
+			sendMessage(msg.chat.id, text)
+		end
 --------
     send_msg(cb_extra[1],table.concat(dialogs),ok_cb,false)
   end
